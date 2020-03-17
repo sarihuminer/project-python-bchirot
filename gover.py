@@ -7,7 +7,8 @@ from PySide2.QtCore import SIGNAL, QObject
 from gover_ui import Ui_MainWindow
 import db
 import copy
-# from PyQt5 import QtGui
+#from PyQt5 import QtGui
+
 from PySide2.QtWidgets import QApplication, QPushButton
 
 
@@ -52,7 +53,7 @@ class selctionn(QMainWindow):
     # defa save_All(self):
     # self.ui.btnsave.clicked.connect(self.save_All)
 
-    def choose_party(p, light_label,text1,text2):
+    def choose_party(p, light_label,text1,text2,window):
         light_label.setStyleSheet("background-color: yellow ;color: blue; border-style: outset;height:100")
         text1.setStyleSheet("color:black;font-weigth:bold; ;font-size:16px")
         text2.setStyleSheet("color:black;font-weigth:bold; ;font-size:12px")
@@ -75,8 +76,15 @@ class selctionn(QMainWindow):
             p.name).fetchone()[0]
         print('after update {}'.format(count))
         print(p.name)
-        # saveto db the selection.....
 
+
+        reply = QMessageBox.question(window, 'להמשיך?',
+                                     'האם אתה בטוח בבחירתך?', QMessageBox.Yes, QMessageBox.No)
+        if reply == QMessageBox.Yes:
+        # do something if yes
+        #else:
+
+            window.close()
     #        self.select_speed = self.ui.comboBoxSpeed.currentText()
     #  c.Car(self.selection_color, self.select_speed)
     # self.hide()

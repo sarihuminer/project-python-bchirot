@@ -33,7 +33,7 @@ class Test:
             # light_label.clicked.connect(partial(name=p.name, charp=p.char))
             # button1.clicked.connect(partial(self.on_button, 1))
             light_label.setCheckable(True)
-            light_label.clicked.connect(partial(gover.selctionn.choose_party, p,light_label,text1,text2))
+            light_label.clicked.connect(partial(gover.selctionn.choose_party, p,light_label,text1,text2,self.window))
             self.light_layout.addWidget(light_label)
         self.light_layout.addStretch()
 
@@ -51,6 +51,7 @@ class Test:
 
         self.populate_lights()
         self.window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+
         self.window.show()
 
 
