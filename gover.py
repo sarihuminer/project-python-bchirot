@@ -7,7 +7,7 @@ from PySide2.QtCore import SIGNAL, QObject
 from gover_ui import Ui_MainWindow
 import db
 import copy
-#from PyQt5 import QtGui
+# from PyQt5 import QtGui
 
 from PySide2.QtWidgets import QApplication, QPushButton
 
@@ -53,38 +53,37 @@ class selctionn(QMainWindow):
     # defa save_All(self):
     # self.ui.btnsave.clicked.connect(self.save_All)
 
-    def choose_party(p, light_label,text1,text2,window):
+    def choose_party(p, light_label, text1, text2, window,w):
         light_label.setStyleSheet("background-color: yellow ;color: blue; border-style: outset;height:100")
         text1.setStyleSheet("color:black;font-weigth:bold; ;font-size:16px")
         text2.setStyleSheet("color:black;font-weigth:bold; ;font-size:12px")
         c = p.char
         n = p.name
-        # count = db.cursor.execute(
-        #   "select countvoters from [bchirot].[dbo].[Party] where charParty='ג'").fetchone()[0]
-        count = db.cursor.execute(
-            "select countvoters from [bchirot].[dbo].[Party] where charParty=? and nameParty=?", p.char,
-            p.name).fetchone()[0]
-        if (count > 0):
-            print(count)
-        count = count + 1
-        db.cursor.execute(
-            "update [dbo].[Party] set [countVoters]=[countVoters]+1 where [nameParty]=? and [charParty]=? ",
-            p.name, p.char)
-        db.conn.commit()
-        count = db.cursor.execute(
-            'select countVoters from [bchirot].[dbo].[Party] where charParty=? and nameParty=?', p.char,
-            p.name).fetchone()[0]
-        print('after update {}'.format(count))
-        print(p.name)
-
-
         reply = QMessageBox.question(window, 'להמשיך?',
                                      'האם אתה בטוח בבחירתך?', QMessageBox.Yes, QMessageBox.No)
         if reply == QMessageBox.Yes:
-        # do something if yes
-        #else:
 
+            # count = db.cursor.execute(
+            #   "select countvoters from [bchirot].[dbo].[Party] where charParty='ג'").fetchone()[0]
+            count = db.cursor.execute(
+                "select countvoters from [bchirot].[dbo].[Party] where charParty=? and nameParty=?", p.char,
+                p.name).fetchone()[0]
+            if (count > 0):
+                print(count)
+            count = count + 1
+            db.cursor.execute(
+                "update [dbo].[Party] set [countVoters]=[countVoters]+1 where [nameParty]=? and [charParty]=? ",
+                p.name, p.char)
+            db.conn.commit()
+            count = db.cursor.execute(
+                'select countVoters from [bchirot].[dbo].[Party] where charParty=? and nameParty=?', p.char,
+                p.name).fetchone()[0]
+            print('after update {}'.format(count))
+            print(p.name)
             window.close()
+            w.show()
+
+
     #        self.select_speed = self.ui.comboBoxSpeed.currentText()
     #  c.Car(self.selection_color, self.select_speed)
     # self.hide()

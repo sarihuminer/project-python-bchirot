@@ -15,7 +15,7 @@ class Test:
             self.allParty_list.append(party.Party(p[0], p[1], p[2]))
         self.window.setCentralWidget(self.mainWidget)
 
-    def populate_lights(self):
+    def populate_lights(self,w):
         self.light_layout = QtWidgets.QVBoxLayout(self.scroll_widget)
         light_label = QtWidgets.QLabel("מערכת בחירות רביעיות של מדינת ישראל הדמוקרטית???")
         light_label.setStyleSheet("color: Blue;font-size:27px")
@@ -33,11 +33,11 @@ class Test:
             # light_label.clicked.connect(partial(name=p.name, charp=p.char))
             # button1.clicked.connect(partial(self.on_button, 1))
             light_label.setCheckable(True)
-            light_label.clicked.connect(partial(gover.selctionn.choose_party, p,light_label,text1,text2,self.window))
+            light_label.clicked.connect(partial(gover.selctionn.choose_party, p,light_label,text1,text2,self.window,w))
             self.light_layout.addWidget(light_label)
         self.light_layout.addStretch()
 
-    def light_palette_ui(self):
+    def light_palette_ui(self,w):
         self.vertical_layout_main = QtWidgets.QVBoxLayout(self.mainWidget)
         self.scroll = QtWidgets.QScrollArea()
         self.scroll.setWidgetResizable(True)
@@ -49,7 +49,7 @@ class Test:
         self.scroll_widget = QtWidgets.QWidget()
         self.scroll.setWidget(self.scroll_widget)
 
-        self.populate_lights()
+        self.populate_lights(w)
         self.window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
         self.window.show()
