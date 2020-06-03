@@ -48,15 +48,17 @@ class selctionn(QMainWindow):
         # for w in s:
         #    print(w)
         # s = self.convert_to_bool(status)
-        if (staus == 'False'):
+        w.hide()
+        if db.cursor.rowcount == 0:
+            return
+        if (staus[0][0] == False):
             db.cursor.execute(
-                "update Person set status=True")
+                "update Persons set status=? where id=?  ", True, self.ui.lineEdit_id.text())
             db.conn.commit()
+            t = Test()
+            t.light_palette_ui(w)
         else:
             print("שקרן-הצביע כבר!")
-        w.hide()
-        t = Test()
-        t.light_palette_ui(w)
 
 
 if __name__ == "__main__":
